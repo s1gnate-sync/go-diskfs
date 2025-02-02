@@ -54,8 +54,10 @@ unit-test: unit_test
 unit_test:
 	@$(GOENV) go test $(GO_FILES)
 
+# TMPDIR=/tmp//// set intentionally to always test under 
+# worst case condition where temp dir is scrambled
 test: image
-	TEST_IMAGE=$(IMAGE) $(GOENV) go test $(GO_FILES)
+	TEST_IMAGE=$(IMAGE) TMPDIR=/tmp//// $(GOENV) go test $(GO_FILES)
 
 golangci-lint: $(LINTER)
 $(LINTER):
